@@ -1,0 +1,45 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.166.1/containers/python-3
+{
+    "name": "QMK",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            // Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-10, debian-9, ubuntu-20.04, ubuntu-18.04
+            "VARIANT": "buster"
+        }
+    },
+
+    "runArgs": [
+        "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+        "--privileged", "-v", "/dev/bus/usb:/dev/bus/usb"
+    ],
+
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+    },
+
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "ms-vscode.cpptools",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "EditorConfig.EditorConfig",
+        "xaver.clang-format",
+        "bierner.github-markdown-preview",
+        "donjayamanne.git-extension-pack",
+        "CoenraadS.bracket-pair-colorizer-2"
+    ],
+
+    "mounts": [
+        // (Optional) Mount the QMK configuration
+        "source=${localEnv:HOME}/.qmk,target=/home/vscode/.qmk,type=bind",
+    ],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "python3 -m pip install --user qmk mypy pydocstyle && python3 -m pip install --user -r requirements-dev.txt && bash util/qmk_install.sh",
+
+    // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode"
+}
