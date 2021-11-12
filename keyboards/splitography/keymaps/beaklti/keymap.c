@@ -44,18 +44,9 @@
 // ▔▔▔▔
 //   This source is shamelessly based on the "default" planck layout
 //
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
-//
 // Change history
 // ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 //   See http://thedarnedestthing.com/colophon
-
-//                === N O T E ===
-//
-// sudo CPATH=<keymap.c directory>/common make ...
 
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -117,7 +108,7 @@ enum keyboard_keycodes {
     SS_A,     // pseudo SFT_T(S(KC_A))
     SS_T,     // pseudo SFT_T(S(KC_T))
     TT_ESC,
-#ifdef STENO_ENABLE
+#if defined(STENO_ENABLE)
     PS_STNA = STN_A,
     PS_STNO = STN_O,
     PS_STNE = STN_E,
@@ -152,12 +143,12 @@ enum keyboard_keycodes {
 // keycodes
 #define ___x___ KC_TRNS
 #define ___fn__ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO
 
-#ifdef HASKELL
+#if defined(HASKELL)
 #    define HS_COLN TD_COLN
 #    define HS_LT TD_LT
 #    define HS_GT TD_GT
@@ -229,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define BASE_12 3
 static uint8_t base_n = 0;
 
-#ifdef CURSOR_ENTER
+#if defined(CURSOR_ENTER)
 static uint8_t cursor_rule = 0;  // (0) nop (1) delete -> enter, shift backspace -> delete
 #endif
 static uint8_t down_rule = 0;  // (1) substitute keycode (2) keycode + shift, see cap_lt()
@@ -401,7 +392,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_layer(record, _GUIFN);
             break;
 
-#ifdef CURSOR_ENTER
+#if defined(CURSOR_ENTER)
         case KC_DEL:
             if (cursor_rule) {
                 trigger_key(record, KC_ENT);
@@ -488,7 +479,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             // ............................................................... Cursor Keys
 
-#ifdef CURSOR_ENTER
+#if defined(CURSOR_ENTER)
         case KC_HOME:
         case KC_END:
         case KC_LEFT:
@@ -533,7 +524,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
         // rolling key post-process
-#ifdef CURSOR_ENTER
+#if defined(CURSOR_ENTER)
     switch (keycode) {
         case KC_HOME:
         case KC_END:

@@ -44,18 +44,9 @@
 // ▔▔▔▔
 //   This source is shamelessly based on the "default" planck layout
 //
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
-//
 // Change history
 // ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 //   See http://thedarnedestthing.com/colophon
-
-//                === N O T E ===
-//
-// sudo CPATH=<keymap.c directory>/common make ...
 
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -120,7 +111,7 @@ enum keyboard_keycodes {
     SS_A,     // pseudo SFT_T(S(KC_A))
     SS_T,     // pseudo SFT_T(S(KC_T))
     TT_ESC,
-#ifdef STENO_ENABLE
+#if defined(STENO_ENABLE)
     PS_STNA = STN_A,
     PS_STNO = STN_O,
     PS_STNE = STN_E,
@@ -139,7 +130,7 @@ enum keyboard_keycodes {
 #define GT_C GUI_T(KC_C)
 #define MT_E MT(MOD_LCTL | MOD_LALT, KC_E)
 #define ST_A SFT_T(KC_A)
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
 #    define HOME_Q GUI_T(KC_Q)
 #    define HOME_I CTL_T(KC_I)
 #    define HOME_E ALT_T(KC_E)
@@ -164,7 +155,7 @@ enum keyboard_keycodes {
 // keycodes
 #define ___x___ KC_TRNS
 #define ___fn__ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO
@@ -185,7 +176,7 @@ enum keyboard_keycodes {
 #define OS_GUI OSM(MOD_LGUI)
 #define OS_SFT OSM(MOD_LSFT)
 
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
 #    define CNTR_TL TT(_TTFNCKEY)
 #    define CNTR_TR KC_CAPS
 #    define CNTR_HL TT(_TTCURSOR)
@@ -218,7 +209,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // ............................................................... Toggle Layers
 
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
 #    include "common/toggle_layout.inc"
 #endif
 
@@ -259,7 +250,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 base_n = base_n & ~BASE_2;
             }
             return false;
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
         case HOME_Q:
         case HOME_W:
             tap_mods(record, KC_LGUI);
@@ -290,7 +281,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 #endif
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
         case TT_ESC:
             tt_clear();  // exit TT layer
             return false;
@@ -331,7 +322,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (raise_number(record, LEFT)) {
                 return false;
             }
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
             if (tt_keycode != 0) {
                 tt_clear();  // exit TT layer
                 return false;
@@ -345,7 +336,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case SL_DEL:
             thumb_roll(record, RIGHT, NOSHIFT, KC_DEL, 0, _MOUSE, _LSYMBOL);
             break;
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
         case CNTR_TL:
         case CNTR_TR:
         case CNTR_HL:

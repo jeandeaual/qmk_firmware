@@ -61,19 +61,10 @@
 // ▔▔▔▔
 //   This source is shamelessly based on the "default" planck layout
 //
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
-//
 // Change history
 // ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 //   See http://thedarnedestthing.com/planck%20constant
 //   See http://thedarnedestthing.com/planck%20done
-
-//                === N O T E ===
-//
-// sudo CPATH=<keymap.c directory>/common make ...
 
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -137,7 +128,7 @@ enum keyboard_keycodes {
     SS_A,     // pseudo SFT_T(S(KC_A))
     SS_T,     // pseudo SFT_T(S(KC_T))
     TT_ESC,
-#ifdef STENO_ENABLE
+#if defined(STENO_ENABLE)
     PS_STNA = STN_A,
     PS_STNO = STN_O,
     PS_STNE = STN_E,
@@ -160,7 +151,7 @@ enum keyboard_keycodes {
 #define MT_E MT(MOD_LCTL | MOD_LALT, KC_E)
 #define MT_X MT(MOD_LALT | MOD_LSFT, KC_X)
 #define ST_A SFT_T(KC_A)
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
 #    define HOME_A CTL_T(KC_A)
 #    define HOME_O GUI_T(KC_O)
 #    define HOME_E ALT_T(KC_E)
@@ -190,7 +181,7 @@ enum keyboard_keycodes {
 // keycodes
 #define ___x___ KC_TRNS
 #define ___fn__ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO
@@ -218,7 +209,7 @@ enum keyboard_keycodes {
 #define OS_SALT OSM(MOD_LALT | MOD_LSFT)
 #define OS_SGUI OSM(MOD_LGUI | MOD_LSFT)
 
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
 #    define CNTR_TL TT(_TTFNCKEY)
 #    define CNTR_TR KC_CAPS
 #    define CNTR_HL TT(_TTCURSOR)
@@ -234,12 +225,12 @@ enum keyboard_keycodes {
 #    define CNTR_BR OSM(MOD_LSFT | MOD_LCTL)
 #endif
 
-#ifdef THUMB_0
+#if defined(THUMB_0)
 #    define LT_EQL LT(_EDIT, KC_EQL)
 #else
 #    define LT_0 LT(_EDIT, KC_0)
 #endif
-#ifndef SHIFT_SYMBOLS
+#if !defined(SHIFT_SYMBOLS)
 #    define LT_A LT(_NUMSYM, KC_A)
 #    define LT_LFTX LT(_SYMREG, KC_LEFT)
 #endif
@@ -261,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // ............................................................... Toggle Layers
 
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
 #    include "common/toggle_layout.inc"
 #endif
 
@@ -303,39 +294,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case AT_DOWN:
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
         case HOME_E:
         case HOME_T:
 #endif
             tap_mods(record, KC_LALT);
             break;
         case CT_RGHT:
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
         case HOME_A:
         case HOME_S:
 #endif
             tap_mods(record, KC_LCTL);
             break;
         case GT_UP:
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
         case HOME_O:
         case HOME_N:
 #endif
             tap_mods(record, KC_LGUI);
             break;
-#ifdef HOME_MODS
+#if defined(HOME_MODS)
         case HOME_U:
         case HOME_H:
             tap_mods(record, KC_LSFT);
             break;
 #endif
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
         case TT_ESC:
             tt_clear();  // exit TT layer
             return false;
 #endif
         case LT_ESC:
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
             if (tt_keycode != 0) {
                 tt_clear();  // exit TT layer
                 return false;
@@ -404,7 +395,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             // LT (_LSHIFT, KC_SPC) left right combination layer, see tap dance TD_SPC
             thumb_roll(record, LEFT, 0, 0, 0, _LSHIFT, _SYMBOL);
             break;
-#ifdef CENTER_TT
+#if defined(CENTER_TT)
         case CNTR_TL:
         case CNTR_TR:
         case CNTR_HL:

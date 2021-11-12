@@ -34,7 +34,7 @@
     _______, KC_F,    MT_E,    KC_D,    _______, ___x___, ___x___, KC_SLSH, KC_7,    KC_8,    KC_9,    KC_ASTR,
     OS_GUI,  GT_C,    AT_B,    ST_A,    _______, ___x___, ___x___, TD_DOT,  KC_4,    KC_5,    KC_6,    KC_MINS,
     _______, KC_HASH, SM_G,    KC_BSLS, _______, ___x___, ___x___, TD_COMM, KC_1,    KC_2,    KC_3,    KC_PLUS,
-#ifdef THUMB_0
+#if defined(THUMB_0)
                                         TT_ESC,  KC_SPC,  KC_0,    KC_EQL
 #else
                                         TT_ESC,  KC_SPC,  KC_EQL,  KC_0

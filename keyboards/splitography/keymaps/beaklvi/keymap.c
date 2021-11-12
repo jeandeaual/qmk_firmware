@@ -44,18 +44,9 @@
 // ▔▔▔▔
 //   This source is shamelessly based on the "default" planck layout
 //
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
-//
 // Change history
 // ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 //   See http://thedarnedestthing.com/colophon
-
-//                === N O T E ===
-//
-// sudo CPATH=<keymap.c directory>/common make ...
 
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -119,7 +110,7 @@ enum keyboard_keycodes {
     SS_A,     // pseudo SFT_T(S(KC_A))
     SS_T,     // pseudo SFT_T(S(KC_T))
     TT_ESC,
-#ifdef STENO_ENABLE
+#if defined(STENO_ENABLE)
     PS_STNA = STN_A,
     PS_STNO = STN_O,
     PS_STNE = STN_E,
@@ -154,12 +145,12 @@ enum keyboard_keycodes {
 // keycodes
 #define ___x___ KC_TRNS
 #define ___fn__ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO
 
-#ifdef HASKELL
+#if defined(HASKELL)
 #    define HS_COLN TD_COLN
 #    define HS_LT TD_LT
 #    define HS_GT TD_GT

@@ -48,7 +48,7 @@ enum keyboard_keycodes {
 
 // Keycodes
 #define ___x___ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO

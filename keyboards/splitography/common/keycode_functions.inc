@@ -267,7 +267,7 @@ void tap_reset(uint16_t keycode, uint8_t layer) {
 
 #define REPEATING 0
 #define TRIPLE 3
-#ifndef ENTER_TOGGLE
+#if !defined(ENTER_TOGGLE)
 #    define ENTER_TOGGLE _RSHIFT
 #endif
 
@@ -333,7 +333,7 @@ void colon(qk_tap_dance_state_t *state, void *user_data) {
 
 void colon_reset(qk_tap_dance_state_t *state, void *user_data) { unregister_code16(S(KC_SCLN)); }
 
-#ifndef EQL_LT
+#if !defined(EQL_LT)
 #    define EQL_LT _EDIT
 #endif
 
@@ -786,7 +786,7 @@ static uint8_t plover = 0;
 
 void toggle_plover(uint8_t state) {
     if (plover != state) {
-#ifdef PLOVER_KEYBIND
+#if defined(PLOVER_KEYBIND)
 #    include "common/plover_keybind.inc"
 #endif
         plover = state;

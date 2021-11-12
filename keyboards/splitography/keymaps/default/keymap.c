@@ -36,11 +36,6 @@
 // Code
 // ▔▔▔▔
 //   This source is shamelessly based on the "default" steno layout
-//
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
 
 #include QMK_KEYBOARD_H
 #include "action_layer.h"
@@ -75,7 +70,7 @@ enum keyboard_keycodes {
 
 // keycodes
 #define ___x___ KC_TRNS
-#ifdef _______
+#if defined(_______)
 #    undef _______
 #endif
 #define _______ KC_NO
