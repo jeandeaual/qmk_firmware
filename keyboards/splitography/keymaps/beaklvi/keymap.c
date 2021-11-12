@@ -190,7 +190,7 @@ enum keyboard_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-#include "base_layout.h"
+#include "base_layout.inc"
 #include "common/steno_layout.inc"
 
 // ...................................................... Number / Function Keys
