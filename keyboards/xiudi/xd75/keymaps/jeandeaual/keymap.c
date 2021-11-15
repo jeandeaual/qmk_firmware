@@ -184,11 +184,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void keyboard_post_init_user(void) {
     debug_enable = true;
-    capslock_led_on();
-    gp100_led_on();
-    gp103_led_on();
+    // capslock_led_on();
+    // gp100_led_on();
+    // gp103_led_on();
     // set_unicode_input_mode(UC_WINC);
     // set_unicode_input_mode(UC_LNX);
     // set_unicode_input_mode(UC_MAC);
-    // send_unicode_hex_string(00e4);
+}
+
+bool led_update_user(led_t led_state) {
+    static bool caps_lock_state = false;
+    static bool num_lock_state = false;
+    static bool scroll_lock_state = false;
+
+    if (led_state.caps_lock != caps_lock_state) {
+        led_state.caps_lock ? capslock_led_on() : capslock_led_off();
+        caps_lock_state = led_state.caps_lock;
+    }
+
+    if (led_state.num_lock != num_lock_state) {
+        led_state.num_lock ? gp100_led_on() : gp100_led_off();
+        num_lock_state = led_state.num_lock;
+    }
+
+    if (led_state.scroll_lock != scroll_lock_state) {
+        led_state.scroll_lock ? gp103_led_on() : gp103_led_off();
+        scroll_lock_state = led_state.scroll_lock;
+    }
+
+    return true;
 }
